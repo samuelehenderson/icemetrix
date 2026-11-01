@@ -25,10 +25,10 @@ import newsData from './news.json'
 export const UPDATED_AT: string = (updated as { updatedAt: string }).updatedAt
 
 /** The season the stat lines belong to, e.g. "2025-26" (may be empty). */
-export const STATS_SEASON: string = (statsData as { season: string }).season || ''
+export const STATS_SEASON: string = (statsData as unknown as { season: string }).season || ''
 
 /** Players who played last season but aren't on any current roster. */
-export const FREE_AGENTS = freeAgentsData as {
+export const FREE_AGENTS = freeAgentsData as unknown as {
   season: string
   updatedAt: string
   skaters: FreeAgent[]
@@ -59,7 +59,7 @@ export interface GameDayGame {
   lineups: Record<string, GameLineup | null> | null
 }
 
-export const GAMEDAY = gamedayData as { date: string; updatedAt: string; games: GameDayGame[] }
+export const GAMEDAY = gamedayData as unknown as { date: string; updatedAt: string; games: GameDayGame[] }
 
 /** Today's game for a team, if the scoreboard has one. */
 export function getGameFor(teamId: string): GameDayGame | null {
@@ -99,7 +99,7 @@ interface TeamSchedule {
   next?: ScheduleGame[]
 }
 
-export const SCHEDULES = schedulesData as {
+export const SCHEDULES = schedulesData as unknown as {
   season: string
   updatedAt: string
   teams: Record<string, TeamSchedule>
@@ -122,7 +122,7 @@ export interface WireTweet {
   url: string
 }
 
-export const WIRE = wireData as { updatedAt: string; tweets: WireTweet[] }
+export const WIRE = wireData as unknown as { updatedAt: string; tweets: WireTweet[] }
 
 /** NHL headlines pulled from public RSS feeds — the keyless news wire. */
 export interface NewsItem {
@@ -132,12 +132,12 @@ export interface NewsItem {
   publishedAt: string | null
 }
 
-export const NEWS = newsData as { updatedAt: string; items: NewsItem[] }
+export const NEWS = newsData as unknown as { updatedAt: string; items: NewsItem[] }
 
 const STATS: Record<string, PlayerStats> =
-  (statsData as { players?: Record<string, PlayerStats> }).players ?? {}
+  (statsData as unknown as { players?: Record<string, PlayerStats> }).players ?? {}
 const INJURIES: Record<string, Injury> =
-  (injuriesData as { players?: Record<string, Injury> }).players ?? {}
+  (injuriesData as unknown as { players?: Record<string, Injury> }).players ?? {}
 
 /** Normalized name key used to match stats/injuries to players. */
 export function nameKey(name: string): string {

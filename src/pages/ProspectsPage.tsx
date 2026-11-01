@@ -20,7 +20,7 @@ interface Prospect {
   note?: string
 }
 
-const BOARD = prospectsData as {
+const BOARD = prospectsData as unknown as {
   updatedAt: string
   title: string
   note?: string

@@ -24,7 +24,7 @@ interface MediaItem {
 
 type Filter = 'all' | 'article' | 'graphic' | 'report'
 
-const DATA = mediaData as { brand: string; tagline: string; items: MediaItem[] }
+const DATA = mediaData as unknown as { brand: string; tagline: string; items: MediaItem[] }
 
 const TYPE_META: Record<MediaItem['type'], { label: string; tone: string; icon: string }> = {
   article: { label: 'Article', tone: 'bg-ice-400/15 text-ice-300 ring-ice-400/30', icon: '📝' },
